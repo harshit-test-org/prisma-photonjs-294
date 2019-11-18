@@ -1,0 +1,16 @@
+generator photon {
+  provider = "photonjs"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+}
+
+model Comment {
+  id         String     @default(cuid()) @id
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  value      String
+  childs     Comment[]  @relation("comment_childs", onDelete: CASCADE)
+}
